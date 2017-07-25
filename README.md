@@ -4,20 +4,20 @@ chainer implementation of pspnet
 
 ## how to use
 
-step1.  
+### step1.  
 install chainer
 ```
-pip install chainier=='1.24.0'
+pip install chainer=='1.24.0'
 ```
   
-step2.  
+### step2.  
 download the cityscape dataset  
 your data directory consists of  
 
 your_path|----gtFine  
 　　　　　 　|----leftImg8bit  
 
-step3.  
+### step3.  
 run the code for training  
 the use of multiple gpus is strongly recommended. pspnet consists of very deep layers.
 if you have 3 gpus, run  
@@ -34,7 +34,7 @@ python main.py --data_dir your_path --gpus 0 0 0
 in this case, due to the limitation of gpu memory, the input size must be to lower.  
 but even if input size is lower than 100, pspnet shows good result.  
   
-step4.  
+### step4.  
 after training 100 epochs, run the code for testing   
 ```
 python main.py --mode test --data_dir your_path --gpus 0 0 0 --load pspnet 100
