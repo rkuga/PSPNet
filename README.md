@@ -31,8 +31,8 @@ if you have only single gpu
 ```
 python main.py --data_dir your_path --gpus 0 0 0
 ```  
-in this case, due to the limitation of gpu memory, the input size must be to lower.  
-but even if input size is lower than 100, pspnet shows good result.  
+in this case, due to the limitation of gpu memory, the input size must be to smaller.  
+but even if input size is smaller than 100, pspnet shows good result.  
   
 ### step4.  
 after training 100 epochs, run the code for testing   
