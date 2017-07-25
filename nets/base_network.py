@@ -24,7 +24,7 @@ class BaseNetwork(object):
 
     def load_state(self,path,epoch):
         print "==> loading state %s epoch %s"%(path,epoch)
-        serializers.load_hdf5('/mnt/poplin/tmp/kuga/chainer_nets/states/%s/net_model_classifier_%s.h5'%(path,epoch), self.network)
+        serializers.load_hdf5('./states/%s/net_model_classifier_%s.h5'%(path,epoch), self.network)
         return int(epoch)
 
 
