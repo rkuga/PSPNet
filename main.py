@@ -2,14 +2,8 @@ import numpy as np
 import argparse
 import importlib
 import sys,os
-import time
 import random
-sys.path.append(os.path.abspath('./'))
 from chainer import cuda
-import requests
-import atexit
-import math
-
 
 
 parser = argparse.ArgumentParser()
@@ -33,13 +27,6 @@ args_dict = dict(args._get_kwargs())
 network_module = importlib.import_module("nets." + args.net)
 network = network_module.Network(**args_dict)
 
-loss_stack_train=[]
-acc_stack_train=[]
-loss_stack_test=[]
-acc_stack_test=[]
-flg=True
-
-
 
 def do_epoch(mode, epoch):
     if mode=='train':
@@ -48,12 +35,10 @@ def do_epoch(mode, epoch):
     if mode=='val':
         length=len(network.test_data)
         perm = np.array(range(length))
-    sum_loss = np.float32(0)
-    sum_accuracy = np.float32(0)
-    bs=args.batchsize
-    bs2=args.batchsize
-    batches_per_epoch=length//bs
-    for batch_index in xrange(0, length-bs, bs):  
+    sum_loss = 0
+    sum_accuracy = 0
+    batches_per_epoch=length//args.batchsize
+    for batch_index in xrange(0, length-args.batchsize, args.batchsize):  
         step_data=network.step(perm,batch_index,mode,epoch)
         prediction = step_data["prediction"] 
         current_loss = step_data["current_loss"]
